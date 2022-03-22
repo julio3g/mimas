@@ -1,0 +1,16 @@
+.forgot {
+  position: relative;
+  animation: 0.5s ease 0s 1 normal none running animationForgot;
+  // width: 100%;
+}
+
+@keyframes animationForgot {
+  0% {
+    right: -50px;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}

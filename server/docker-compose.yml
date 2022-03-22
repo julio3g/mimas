@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  database-mimas:
+    image: postgres
+    container_name: database-mimas
+    restart: always
+    ports:
+      - 25432:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=6socJwr%^hjr
+      - POSTGRES_DB=database-mimas
+    volumes:
+      - pgdata:/data/postgres
+  # app:
+  #   restart: always
+  #   build: .
+  #   container_name: server-mimas
+  #   ports:
+  #     - 3333:3333
+  #   volumes:
+  #     - .:/usr/app
+  #   links:
+  #     - database-mimas
+  #   depends_on:
+  #     - database-mimas
+volumes:
+  pgdata:
+    driver: local

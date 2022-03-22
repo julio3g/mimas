@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Brands {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  created_at DateTime @default(now())
+  Tools      Tools[]
+
+  @@map("brands")
+}
+
+model Users {
+  id         String        @id @default(uuid())
+  name       String
+  email      String        @unique
+  password   String
+  phone      String        @unique
+  isAdmin    Boolean       @default(false)
+  created_at DateTime      @default(now())
+  userTokens UsersTokens[]
+  comments   Comments[]
+  using      Using[]
+
+  @@map("users")
+}
+
+model UsersTokens {
+  id            String   @id @default(uuid())
+  refresh_token String
+  user_id       String
+  user          Users    @relation(fields: [user_id], references: [id])
+  expires_date  DateTime
+  created_at    DateTime @default(now())
+
+  @@map("users_tokens")
+}
+
+model Tools {
+  id         String       @id @default(uuid())
+  name       String       @unique
+  amount     String
+  available  Boolean      @default(true)
+  brand_id   String?
+  brand      Brands?      @relation(fields: [brand_id], references: [id])
+  created_at DateTime     @default(now())
+  using      Using[]
+  comments   Comments[]
+  toolsImage ToolsImage[]
+
+  @@map("tools")
+}
+
+model Comments {
+  id         String   @id @default(uuid())
+  comment    String
+  tool_id    String
+  tool       Tools    @relation(fields: [tool_id], references: [id])
+  user_id    String
+  user       Users    @relation(fields: [user_id], references: [id])
+  created_at DateTime @default(now())
+
+  @@map("comments")
+}
+
+model Using {
+  id         String   @id @default(uuid())
+  user_id    String   @unique
+  user       Users    @relation(fields: [user_id], references: [id])
+  tool_id    String
+  tool       Tools    @relation(fields: [tool_id], references: [id])
+  updated_at DateTime @updatedAt()
+  created_at DateTime @default(now())
+
+  @@map("using")
+}
+
+model ToolsImage {
+  id          String   @id @default(uuid())
+  images_name String[]
+  tool_id     String
+  tool        Tools    @relation(fields: [tool_id], references: [id])
+  created_at  DateTime @default(now())
+
+  @@map("tools_images")
+}
