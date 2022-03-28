@@ -8,7 +8,7 @@ async function createUserAdmin() {
       OR: [
         {
           email: { equals: 'juliocesar.orso@gmail.com' },
-          phone: { equals: '111' },
+          phone: { equals: '49991450440' },
         },
       ],
     },
@@ -18,7 +18,7 @@ async function createUserAdmin() {
     data: {
       name: 'admin',
       email: 'juliocesar.orso@gmail.com',
-      phone: '111',
+      phone: '49991450440',
       password: hashPassword,
       isAdmin: true,
     },
