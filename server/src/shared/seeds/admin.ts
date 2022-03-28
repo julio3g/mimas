@@ -6,7 +6,10 @@ async function createUserAdmin() {
   const userAlreadyExists = await prisma.users.findFirst({
     where: {
       OR: [
-        { email: { equals: 'admin@example.com' }, phone: { equals: '111' } },
+        {
+          email: { equals: 'juliocesar.orso@gmail.com' },
+          phone: { equals: '111' },
+        },
       ],
     },
   });
@@ -14,7 +17,7 @@ async function createUserAdmin() {
   await prisma.users.create({
     data: {
       name: 'admin',
-      email: 'admin@example.com',
+      email: 'juliocesar.orso@gmail.com',
       phone: '111',
       password: hashPassword,
       isAdmin: true,
