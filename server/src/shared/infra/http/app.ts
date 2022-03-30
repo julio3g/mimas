@@ -9,8 +9,11 @@ import http from 'http';
 import cors from 'cors';
 import { Server } from 'socket.io';
 import upload from '@config/upload';
+import rateLimiter from './middlewares/rateLimiter';
 
 const app = express();
+
+app.use(rateLimiter);
 app.use(cors());
 const serverHttp = http.createServer(app);
 
