@@ -10,11 +10,24 @@ import cors from 'cors';
 import { Server } from 'socket.io';
 import upload from '@config/upload';
 import rateLimiter from './middlewares/rateLimiter';
+import * as Sentry from '@sentry/node';
+import * as Tracing from '@sentry/tracing';
 
 const app = express();
 
 app.use(rateLimiter);
-app.use(cors());
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  integrations: [
+    new Sentry.Integrations.Http({ tracing: true }),
+    new Tracing.Integrations.Express({ app }),
+  ],
+  tracesSampleRate: 1.0,
+});
+
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.tracingHandler());
+app.use(express.json());
 const serverHttp = http.createServer(app);
 
 const io = new Server(serverHttp, {
@@ -27,10 +40,10 @@ io.on('connection', (socket) => {
   console.log(`User connection in ${socket.id}`);
 });
 
-app.use(express.json());
-app.use(router);
 app.use('/tools', express.static(`${upload.tmpFolder}/tools`));
-
+app.use(cors());
+app.use(router);
+app.use(Sentry.Handlers.errorHandler());
 app.use(
   (err: Error, request: Request, response: Response, next: NextFunction) => {
     if (err instanceof AppError)
