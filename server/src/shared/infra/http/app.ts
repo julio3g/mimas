@@ -17,7 +17,7 @@ const app = express();
 
 app.use(rateLimiter);
 Sentry.init({
-  dsn: process.env.SENTRY_DSN,
+  dsn: process.env.SENTRY_DNS,
   integrations: [
     new Sentry.Integrations.Http({ tracing: true }),
     new Tracing.Integrations.Express({ app }),
@@ -25,9 +25,9 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
+app.use(express.json());
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
-app.use(express.json());
 const serverHttp = http.createServer(app);
 
 const io = new Server(serverHttp, {
