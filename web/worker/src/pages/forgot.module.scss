@@ -1,0 +1,44 @@
+.forgot {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  .content {
+    width: 100%;
+    max-width: 20rem;
+    position: relative;
+    animation: 0.5s ease 0s running animationForgot;
+    h2 {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    form {
+      margin-top: 2rem;
+      input,
+      button {
+        margin-bottom: 1rem;
+      }
+    }
+    a {
+      display: block;
+      text-align: center;
+      font-size: 0.875rem;
+      transition: color 0.1s ease 0s;
+      &:hover {
+        color: var(--orange-light);
+      }
+    }
+  }
+}
+@keyframes animationForgot {
+  0% {
+    opacity: 0;
+    right: -64px;
+    visibility: hidden;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+    visibility: initial;
+  }
+}
