@@ -6,10 +6,22 @@ import Logo from '../../public/assets/logo.svg';
 import LogoGoogle from '../assets/logo-g-google.svg';
 import LogoFacebook from '../assets/logo-f-facebook.svg';
 import { ButtonSendForm } from '../components/ButtonSendForm';
+import { FormEvent, useContext, useState } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function Home() {
-  function handleSubmit() {
-    console.log('oi');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { signIn } = useContext(AuthContext);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    const data = {
+      email,
+      password,
+    };
+    await signIn(data);
   }
   return (
     <>
@@ -26,10 +38,23 @@ export default function Home() {
               Faça seu login <br /> na plataforma
             </h1>
           </div>
-          <form className={styles.form}>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <section className={styles.wrapperInput}>
-              <Input name="email" type="email" placeholder="E-mail" />
-              <Input name="password" type="password" placeholder="Senha" eye />
+              <Input
+                name="email"
+                type="email"
+                placeholder="E-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Input
+                name="password"
+                type="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                eye
+              />
             </section>
             <Link href="/forgot">
               <a>Esqueci minha senha</a>
