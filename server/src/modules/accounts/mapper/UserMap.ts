@@ -1,5 +1,4 @@
 import { instanceToInstance } from 'class-transformer';
-
 interface IUser {
   id: string;
   name: string;
@@ -7,8 +6,7 @@ interface IUser {
   phone: string;
   password: string;
 }
-
-class UserMap {
+export class UserMap {
   static toDTO({ id, name, email, phone, password }: IUser) {
     const user = instanceToInstance({
       id,
@@ -20,5 +18,3 @@ class UserMap {
     return user;
   }
 }
-
-export { UserMap };

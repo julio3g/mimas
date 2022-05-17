@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { DeleteBrandUseCase } from './DeleteBrandUseCase';
-
 export class DeleteBrandController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;

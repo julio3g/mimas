@@ -1,6 +1,5 @@
-import { IToolDTO } from '@modules/tools/dtos/IToolDTO';
 import { prisma } from '@database/prismaClient';
-
+import { IToolDTO } from '@modules/tools/dtos/IToolDTO';
 export class UpdateToolUseCase {
   async execute({ id, name, amount, brand_id }: IToolDTO) {
     const tool = await prisma.tools.findFirst({ where: { id } });

@@ -1,8 +1,6 @@
 import { prisma } from '@database/prismaClient';
-
 export class ListBrandsUseCase {
   async execute() {
-    const brands = await prisma.brands.findMany();
-    return brands;
+    return await prisma.brands.findMany({ orderBy: { name: 'asc' } });
   }
 }

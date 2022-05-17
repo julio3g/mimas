@@ -82,11 +82,11 @@ model Using {
 }
 
 model ToolsImage {
-  id          String   @id @default(uuid())
-  images_name String[]
-  tool_id     String
-  tool        Tools    @relation(fields: [tool_id], references: [id])
-  created_at  DateTime @default(now())
+  id         String   @id @default(uuid())
+  image_name String
+  tool_id    String
+  tool       Tools    @relation(fields: [tool_id], references: [id])
+  created_at DateTime @default(now())
 
-  @@map("tools_images")
+  @@map("tools_image")
 }

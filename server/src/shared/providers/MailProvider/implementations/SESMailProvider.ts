@@ -1,13 +1,11 @@
-import { SES } from 'aws-sdk';
 import fs from 'fs';
+import { SES } from 'aws-sdk';
 import handlebars from 'handlebars';
-import nodemailer, { Transporter } from 'nodemailer';
 import { injectable } from 'tsyringe';
-
 import { IMailProvider } from '../IMailProvider';
-
+import nodemailer, { Transporter } from 'nodemailer';
 @injectable()
-class SESMailProvider implements IMailProvider {
+export class SESMailProvider implements IMailProvider {
   private client: Transporter;
   constructor() {
     this.client = nodemailer.createTransport({
@@ -39,15 +37,5 @@ class SESMailProvider implements IMailProvider {
       subject,
       html: templateHTML,
     });
-
-    // transporter.sendMail(mailOptions, function (err, info) {
-    //   if (err) {
-    //     res.json(err);
-    //   } else {
-    //     res.json(info);
-    //   }
-    // });
   }
 }
-
-export { SESMailProvider };

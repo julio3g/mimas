@@ -1,6 +1,5 @@
-import { AppError } from '@shared/errors/AppError';
 import { prisma } from '@database/prismaClient';
-
+import { AppError } from '@shared/errors/AppError';
 export class CreateBrandUseCase {
   async execute(name: string) {
     const brandAlreadyExists = await prisma.brands.findFirst({

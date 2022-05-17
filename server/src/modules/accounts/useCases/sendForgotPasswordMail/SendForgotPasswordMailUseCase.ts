@@ -5,9 +5,8 @@ import { prisma } from '@database/prismaClient';
 import { AppError } from '@shared/errors/AppError';
 import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
 import { IMailProvider } from '@shared/providers/MailProvider/IMailProvider';
-
 @injectable()
-class SendForgotPasswordMailUseCase {
+export class SendForgotPasswordMailUseCase {
   constructor(
     @inject('DayjsDateProvider')
     private dateProvider: IDateProvider,
@@ -15,9 +14,7 @@ class SendForgotPasswordMailUseCase {
     private mailProvider: IMailProvider,
   ) {}
   async execute(email: string): Promise<void> {
-    const user = await prisma.users.findFirst({
-      where: { email },
-    });
+    const user = await prisma.users.findFirst({ where: { email } });
     const templatePath = resolve(
       __dirname,
       '..',
@@ -36,10 +33,14 @@ class SendForgotPasswordMailUseCase {
         expires_date,
       },
     });
+    const local = process.env.FORGOT_MAIL_URL_DEV;
+    const prod = process.env.FORGOT_MAIL_URL_PROD;
+    const mailUrl = { ethereal: local, ses: prod };
     const variables = {
       name: user.name,
       email: user.email,
-      link: `${process.env.FORGOT_MAIL_URL}${token}`,
+      // link: `${process.env.FORGOT_MAIL_URL}${token}`,
+      link: `${mailUrl[process.env.MAIL_PROVIDER]}${token}`,
     };
     await this.mailProvider.sendMail(
       email,
@@ -49,5 +50,3 @@ class SendForgotPasswordMailUseCase {
     );
   }
 }
-
-export { SendForgotPasswordMailUseCase };

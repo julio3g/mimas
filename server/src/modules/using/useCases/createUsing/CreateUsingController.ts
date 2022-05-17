@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { CreateUsingUseCase } from './CreateUsingUseCase';
-
 export class CreateUsingController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.user;

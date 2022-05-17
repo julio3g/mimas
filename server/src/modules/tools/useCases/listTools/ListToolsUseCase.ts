@@ -1,8 +1,10 @@
 import { prisma } from '@database/prismaClient';
-
 export class ListToolsUseCase {
   async execute() {
-    const tools = await prisma.tools.findMany({
+    return await prisma.tools.findMany({
+      orderBy: {
+        name: 'asc',
+      },
       select: {
         id: true,
         name: true,
@@ -22,23 +24,13 @@ export class ListToolsUseCase {
             },
           },
         },
-        comments: {
-          include: {
-            user: {
-              select: {
-                name: true,
-              },
-            },
-          },
-        },
         toolsImage: {
           select: {
             id: true,
-            images_name: true,
+            image_name: true,
           },
         },
       },
     });
-    return tools;
   }
 }

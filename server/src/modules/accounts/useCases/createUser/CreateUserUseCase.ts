@@ -3,7 +3,6 @@ import { Users } from '@prisma/client';
 import { prisma } from '@database/prismaClient';
 import { AppError } from '@shared/errors/AppError';
 import { IUserDTO } from '@modules/accounts/dtos/IUserDTO';
-
 export class CreateUserUseCase {
   async execute({ name, email, phone, password }: IUserDTO): Promise<Users> {
     const userAlreadyExists = await prisma.users.findFirst({

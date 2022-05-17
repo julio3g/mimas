@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { CreateToolUseCase } from './CreateToolUseCase';
-
 export class CreateToolController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, amount, brand_id } = request.body;

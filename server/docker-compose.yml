@@ -6,10 +6,11 @@ services:
     container_name: database-mimas
     restart: always
     ports:
-      - 25432:5432
+      - 5432:5432
     environment:
       - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=6socJwr%^hjr
+      # - POSTGRES_PASSWORD=6socJwr%^hjr
+      - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=database-mimas
     volumes:
       - pgdata:/data/postgres

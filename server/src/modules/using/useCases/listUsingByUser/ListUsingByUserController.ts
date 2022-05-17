@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { ListUsingByUserUseCase } from './ListUsingByUserUseCase';
-
 export class ListUsingByUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id: user_id } = request.user;

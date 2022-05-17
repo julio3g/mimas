@@ -1,17 +1,17 @@
-import 'dotenv/config';
-import express, { NextFunction, Request, Response } from 'express';
-import 'express-async-errors';
 import 'reflect-metadata';
-import { AppError } from '@shared/errors/AppError';
-import { router } from './routes';
-import '@shared/providers';
-import http from 'http';
-import cors from 'cors';
-import { Server } from 'socket.io';
+import 'dotenv/config';
 import upload from '@config/upload';
-import rateLimiter from './middlewares/rateLimiter';
 import * as Sentry from '@sentry/node';
 import * as Tracing from '@sentry/tracing';
+import { AppError } from '@shared/errors/AppError';
+import '@shared/providers';
+import cors from 'cors';
+import express, { NextFunction, Request, Response } from 'express';
+import 'express-async-errors';
+import http from 'http';
+import { Server } from 'socket.io';
+import rateLimiter from './middlewares/rateLimiter';
+import { router } from './routes';
 
 const app = express();
 
@@ -39,7 +39,6 @@ const io = new Server(serverHttp, {
 io.on('connection', (socket) => {
   console.log(`User connection in ${socket.id}`);
 });
-
 app.use('/tools', express.static(`${upload.tmpFolder}/tools`));
 app.use(cors());
 app.use(router);
@@ -54,5 +53,4 @@ app.use(
     });
   },
 );
-
-export { app };
+export { serverHttp, io };

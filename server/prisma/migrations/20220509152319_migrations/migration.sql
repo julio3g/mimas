@@ -59,7 +59,7 @@ CREATE TABLE "using" (
     "id" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
     "tool_id" TEXT NOT NULL,
-    "updated_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "using_pkey" PRIMARY KEY ("id")
@@ -86,9 +86,6 @@ CREATE UNIQUE INDEX "users_phone_key" ON "users"("phone");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "tools_name_key" ON "tools"("name");
-
--- CreateIndex
-CREATE UNIQUE INDEX "comments_user_id_key" ON "comments"("user_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "using_user_id_key" ON "using"("user_id");

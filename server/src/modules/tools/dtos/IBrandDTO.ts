@@ -1,4 +1,4 @@
 export interface IBrandDTO {
-  id: string;
+  id?: string;
   name: string;
 }

@@ -1,7 +1,6 @@
 import { AppError } from '@shared/errors/AppError';
 import { prisma } from '@database/prismaClient';
 import { NextFunction, Request, Response } from 'express';
-
 export async function ensureAdmin(
   request: Request,
   response: Response,

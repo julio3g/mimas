@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { UpdateToolUseCase } from './UpdateToolUseCase';
-
 export class UpdateToolController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;

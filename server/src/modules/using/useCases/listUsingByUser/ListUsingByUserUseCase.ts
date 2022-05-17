@@ -1,8 +1,7 @@
 import { prisma } from '@database/prismaClient';
-
 export class ListUsingByUserUseCase {
   async execute(user_id: string) {
-    const rentalsByUser = await prisma.using.findMany({
+    return await prisma.using.findMany({
       where: { user_id },
       select: {
         id: true,
@@ -27,13 +26,12 @@ export class ListUsingByUserUseCase {
             },
             toolsImage: {
               select: {
-                images_name: true,
+                image_name: true,
               },
             },
           },
         },
       },
     });
-    return rentalsByUser;
   }
 }

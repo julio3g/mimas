@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { DevolutionUsingUseCase } from './DevolutionUsingUseCase';
-
 export class DevolutionUsingController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { id: user_id } = request.user;

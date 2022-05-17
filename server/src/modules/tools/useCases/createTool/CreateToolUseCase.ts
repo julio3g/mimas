@@ -1,7 +1,6 @@
 import { prisma } from '@database/prismaClient';
 import { AppError } from '@shared/errors/AppError';
 import { IToolDTO } from '@modules/tools/dtos/IToolDTO';
-
 export class CreateToolUseCase {
   async execute({ name, amount, brand_id }: IToolDTO) {
     const toolAlreadyExists = await prisma.tools.findFirst({ where: { name } });

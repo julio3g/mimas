@@ -1,5 +1,5 @@
 export interface IToolDTO {
-  id: string;
+  id?: string;
   name: string;
   amount: string;
   brand_id: string;

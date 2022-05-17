@@ -11,7 +11,7 @@ import { UpdateToolController } from '@modules/tools/useCases/updateTool/UpdateT
 import { UploadToolImageController } from '@modules/tools/useCases/uploadToolImage/UploadToolImageController';
 import { DeleteToolImageController } from '@modules/tools/useCases/deleteToolImage/DeleteToolImageController';
 
-const toolsRoutes = Router();
+export const toolsRoutes = Router();
 
 const createToolController = new CreateToolController();
 const listToolsController = new ListToolsController();
@@ -24,11 +24,11 @@ const uploadCarImages = multer(uploadConfig);
 
 toolsRoutes.post(
   '/',
-  ensureAuthenticated,
-  ensureAdmin,
+  // ensureAuthenticated,
+  // ensureAdmin,
   createToolController.handle,
 );
-toolsRoutes.get('/', ensureAuthenticated, listToolsController.handle);
+toolsRoutes.get('/', listToolsController.handle);
 toolsRoutes.put(
   '/:id',
   ensureAuthenticated,
@@ -43,9 +43,9 @@ toolsRoutes.delete(
 );
 toolsRoutes.post(
   '/images/:id',
-  ensureAuthenticated,
-  ensureAdmin,
-  uploadCarImages.array('images'),
+  // ensureAuthenticated,
+  // ensureAdmin,
+  uploadCarImages.single('image'),
   uploadToolImageController.handle,
 );
 toolsRoutes.delete(
@@ -54,5 +54,3 @@ toolsRoutes.delete(
   ensureAdmin,
   deleteToolImageController.handle,
 );
-
-export { toolsRoutes };

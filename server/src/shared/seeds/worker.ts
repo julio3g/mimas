@@ -19,7 +19,6 @@ async function createUserWorker() {
       password: hashPassword,
     },
   });
-  console.log('Create user worker 👷🏼');
+  console.log('Create user worker');
 }
-
 createUserWorker();

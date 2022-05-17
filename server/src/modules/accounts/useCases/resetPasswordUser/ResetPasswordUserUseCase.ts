@@ -3,12 +3,10 @@ import { inject, injectable } from 'tsyringe';
 import { prisma } from '@database/prismaClient';
 import { AppError } from '@shared/errors/AppError';
 import { IDateProvider } from '@shared/providers/DateProvider/IDateProvider';
-
 interface IRequest {
   token: string;
   password: string;
 }
-
 @injectable()
 export class ResetPasswordUserUseCase {
   constructor(
