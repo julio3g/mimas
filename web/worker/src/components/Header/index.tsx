@@ -1,8 +1,9 @@
 import Link from 'next/link';
-
-import logo from '../../assets/logo.svg';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export function Header() {
+  const { user } = useContext(AuthContext);
   return (
     <header>
       <nav>
@@ -10,9 +11,9 @@ export function Header() {
           test
         </Link>
         <nav>
+          <p>{user?.name}</p>
           <Link href="/profile">profile</Link>
         </nav>
-        <div>test</div>
       </nav>
     </header>
   );

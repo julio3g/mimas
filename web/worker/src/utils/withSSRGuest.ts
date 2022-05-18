@@ -5,17 +5,15 @@ import {
 } from 'next';
 import { destroyCookie, parseCookies } from 'nookies';
 import { AuthTokenError } from '../services/errors/AuthTokenError';
-
 export function withSSRGuest<P>(fn: GetServerSideProps<P>) {
   return async (
     ctx: GetServerSidePropsContext,
   ): Promise<GetServerSidePropsResult<P>> => {
     const cookies = parseCookies(ctx);
-
     if (cookies['mimas_next_access_token']) {
       return {
         redirect: {
-          destination: '/dashboard',
+          destination: '/home',
           permanent: false,
         },
       };

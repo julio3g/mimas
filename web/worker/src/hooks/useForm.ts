@@ -8,19 +8,18 @@ const types = {
   },
 };
 
-export default function useForm({
-  type,
-  messageError,
-}: {
+interface IProps {
   type: any;
-  messageError: string;
-}) {
+  message: string;
+}
+
+export default function useForm({ type, message }: IProps) {
   const [value, setValue] = React.useState('');
   const [error, setError] = React.useState(null);
   function validate(value: any) {
     if (type === false) return true;
     if (value.length === 0) {
-      setError(messageError);
+      setError(message);
       return false;
     } else if (types[type] && !types[type].regex.test(value)) {
       setError(types[type].message);
@@ -34,7 +33,6 @@ export default function useForm({
     if (error) validate(target.value);
     setValue(target.value);
   }
-
   return {
     value,
     setValue,

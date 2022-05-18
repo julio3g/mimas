@@ -59,21 +59,6 @@ export default function Home() {
               <a>Esqueci minha senha</a>
             </Link>
             <Button type="submit">Entrar</Button>
-            {/* <div className={styles.spaceBar}>
-              <div>
-                <b>Ou</b>
-              </div>
-            </div>
-            <div className={styles.wrapper}>
-              <button className={styles.buttonGoogle}>
-                <LogoGoogle />
-                Google
-              </button>
-              <button className={styles.buttonFacebook}>
-                <LogoFacebook />
-                Facebook
-              </button>
-            </div> */}
           </form>
         </div>
       </main>

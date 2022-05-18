@@ -1,0 +1,27 @@
+.wrapper {
+  margin-bottom: 1rem;
+  label {
+    display: block;
+    line-height: 1;
+    font-size: 0.875rem;
+    padding-bottom: 0.25rem;
+  }
+  .textarea {
+    width: 100%;
+    display: block;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    background: var(--gray-100);
+    transition: border 0.2s ease 0s;
+    border: 2px solid var(--gray-100);
+    &:hover,
+    &:focus {
+      border-color: var(--orange-light);
+    }
+  }
+  .error {
+    color: #f31;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+}

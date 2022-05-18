@@ -5,10 +5,8 @@ import { api } from '../services/apiClient';
 
 type User = {
   email: string;
-  user: {
-    name: string;
-    phone: string;
-  };
+  name: string;
+  phone: string;
 };
 
 type SignInCredentials = {
@@ -70,10 +68,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         phone,
         password,
       });
-      const { token, refresh_token, user: user } = response.data;
-
-      console.log(user.name);
-      // console.log(response.data.user.name);
+      const { token, refresh_token, user: newLoggedUser } = response.data;
       setCookie(undefined, 'mimas_next_access_token', token, {
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: '/',
@@ -82,9 +77,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: '/',
       });
-      setUser({ email, user });
+      setUser(newLoggedUser);
       api.defaults.headers['Authorization'] = `Bearer ${token}`;
-      Router.push('/home');
+      Router.push('/dashboard');
     } catch (err) {
       console.log(err);
     }

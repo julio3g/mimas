@@ -1,11 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { Input } from '../components/Input';
 import { FormEvent, useState } from 'react';
 import { api } from '../services/apiClient';
-import styles from '../styles/pages/forgot.module.scss';
-import useForm from '../hooks/useForm';
+import { Input } from '../components/Form/Input';
 import { Button } from '../components/Form/Button';
+import styles from '../styles/pages/forgot.module.scss';
 
 export default function Forgot() {
   const [email, setEmail] = useState('');
