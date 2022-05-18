@@ -5,13 +5,25 @@ import { setupAPIClient } from '../services/api';
 import { api } from '../services/apiClient';
 import { withSSRAuth } from '../utils/withSSRAuth';
 
-export default function Dashboard() {
+interface UserInfo {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+}
+
+export default function Profile() {
   const { user, signOut } = useContext(AuthContext);
+
+  const userData = useState('');
+
+  const [dataUser, setDataUser] = useState([]);
   useEffect(() => {
     api
       .get('/users/profile')
       .then((response) => {
-        console.log(response);
+        const { name } = response.data;
+        setDataUser(name);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -19,17 +31,9 @@ export default function Dashboard() {
   return (
     <div>
       <Header />
-      <h1>Dashboard {user}</h1>
+      <h1>Profile</h1>
+      <p>{dataUser}</p>
       <button onClick={signOut}>Sing Out</button>
     </div>
   );
 }
-export const getServerSideProps = withSSRAuth(async (ctx) => {
-  const apiClient = setupAPIClient(ctx);
-  const response = await apiClient.get('/users/profile');
-  // console.log(response.data);
-
-  return {
-    props: {},
-  };
-});

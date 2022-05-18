@@ -1,14 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import styles from './home.module.scss';
-import { Input } from '../components/Input';
+import styles from '../styles/pages/home.module.scss';
+import { Input } from '../components/Form/Input';
 import Logo from '../../public/assets/logo.svg';
-import LogoGoogle from '../assets/logo-g-google.svg';
-import LogoFacebook from '../assets/logo-f-facebook.svg';
-import { ButtonSendForm } from '../components/ButtonSendForm';
 import { FormEvent, useContext, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { withSSRGuest } from '../utils/withSSRGuest';
+import { Button } from '../components/Form/Button';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -40,7 +38,7 @@ export default function Home() {
             </h1>
           </div>
           <form className={styles.form} onSubmit={handleSubmit}>
-            <section className={styles.wrapperInput}>
+            <section>
               <Input
                 name="email"
                 type="email"
@@ -60,8 +58,8 @@ export default function Home() {
             <Link href="/forgot">
               <a>Esqueci minha senha</a>
             </Link>
-            <ButtonSendForm type="submit">Entrar</ButtonSendForm>
-            <div className={styles.spaceBar}>
+            <Button type="submit">Entrar</Button>
+            {/* <div className={styles.spaceBar}>
               <div>
                 <b>Ou</b>
               </div>
@@ -75,7 +73,7 @@ export default function Home() {
                 <LogoFacebook />
                 Facebook
               </button>
-            </div>
+            </div> */}
           </form>
         </div>
       </main>
@@ -84,7 +82,5 @@ export default function Home() {
 }
 // ctx = context
 export const getServerSideProps = withSSRGuest(async (ctx) => {
-  return {
-    props: {},
-  };
+  return { props: {} };
 });

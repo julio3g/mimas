@@ -10,9 +10,10 @@ export function setupAPIClient(ctx = undefined) {
   let cookies = parseCookies(ctx);
 
   const api = axios.create({
-    baseURL: 'https://api.app.construagil.net.br',
+    // baseURL: 'https://api.app.construagil.net.br',
+    baseURL: 'http://localhost:3333',
     headers: {
-      Authorization: `Bearer ${cookies['nextAuth.token']}`,
+      Authorization: `Bearer ${cookies['mimas_next_access_token']}`,
     },
   });
 
@@ -78,6 +79,7 @@ export function setupAPIClient(ctx = undefined) {
           }
         }
       }
+      return Promise.reject(error);
     },
   );
   return api;

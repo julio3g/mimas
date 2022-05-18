@@ -5,30 +5,28 @@ import { api } from '../services/apiClient';
 
 type User = {
   email: string;
-  name: string;
+  user: {
+    name: string;
+    phone: string;
+  };
 };
 
 type SignInCredentials = {
-  email: string;
+  email?: string;
   password: string;
   phone?: string;
 };
-
 type AuthContextData = {
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut: () => void;
   user: User;
   isAuthenticated: boolean;
 };
-
 interface AuthProviderProps {
   children: ReactNode;
 }
-
 export const AuthContext = createContext({} as AuthContextData);
-
 let authChannel: BroadcastChannel;
-
 export function signOut() {
   destroyCookie(undefined, 'mimas_next_access_token');
   destroyCookie(undefined, 'mimas_next_refresh_token');
@@ -72,7 +70,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         phone,
         password,
       });
-      const { token, refresh_token, name } = response.data;
+      const { token, refresh_token, user: user } = response.data;
+
+      console.log(user.name);
+      // console.log(response.data.user.name);
       setCookie(undefined, 'mimas_next_access_token', token, {
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: '/',
@@ -81,9 +82,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: '/',
       });
-      setUser({ email, name });
+      setUser({ email, user });
       api.defaults.headers['Authorization'] = `Bearer ${token}`;
-      Router.push('/dashboard');
+      Router.push('/home');
     } catch (err) {
       console.log(err);
     }

@@ -6,7 +6,13 @@
   border-radius: 0.75rem;
   background: var(--orange-light);
   transition: background 0.2s ease 0s;
-  &:hover {
+  &:hover,
+  &:focus {
+    outline: none;
     background: var(--orange);
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: wait;
   }
 }

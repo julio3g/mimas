@@ -9,7 +9,10 @@ export function Header() {
         <Link href="/" passHref>
           test
         </Link>
-        {/* <img src={logo} alt="logo" /> */}
+        <nav>
+          <Link href="/profile">profile</Link>
+        </nav>
+        <div>test</div>
       </nav>
     </header>
   );
