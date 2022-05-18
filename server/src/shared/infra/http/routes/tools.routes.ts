@@ -24,8 +24,8 @@ const uploadCarImages = multer(uploadConfig);
 
 toolsRoutes.post(
   '/',
-  // ensureAuthenticated,
-  // ensureAdmin,
+  ensureAuthenticated,
+  ensureAdmin,
   createToolController.handle,
 );
 toolsRoutes.get('/', listToolsController.handle);
@@ -43,9 +43,9 @@ toolsRoutes.delete(
 );
 toolsRoutes.post(
   '/images/:id',
-  // ensureAuthenticated,
-  // ensureAdmin,
-  uploadCarImages.single('image'),
+  ensureAuthenticated,
+  ensureAdmin,
+  uploadCarImages.array('image'),
   uploadToolImageController.handle,
 );
 toolsRoutes.delete(

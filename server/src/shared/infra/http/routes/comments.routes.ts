@@ -11,7 +11,7 @@ const listCommentsController = new ListCommentsController();
 const deleteCommentController = new DeleteCommentController();
 const updateCommentController = new UpdateCommentController();
 commentsRoutes.post('/', ensureAuthenticated, createCommentController.handle);
-commentsRoutes.get('/', listCommentsController.handle);
+commentsRoutes.get('/', ensureAuthenticated, listCommentsController.handle);
 commentsRoutes.delete(
   '/:id',
   ensureAuthenticated,

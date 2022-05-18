@@ -26,7 +26,6 @@ export class RefreshTokenUseCase {
     });
     if (!userToken) throw new AppError("Refresh Token does't exists!");
     await prisma.usersTokens.delete({ where: { id: userToken.id } });
-    console.log(userToken.id);
     const refresh_token = sign({ email }, auth.secret_refresh_token, {
       subject: sub,
       expiresIn: auth.expires_in_refresh_token,

@@ -17,11 +17,7 @@ export class ListToolsUseCase {
         available: true,
         using: {
           include: {
-            user: {
-              select: {
-                name: true,
-              },
-            },
+            user: true,
           },
         },
         toolsImage: {

@@ -26,7 +26,7 @@ model Users {
   created_at DateTime      @default(now())
   userTokens UsersTokens[]
   comments   Comments[]
-  using      Using[]
+  using      Using?
 
   @@map("users")
 }
@@ -50,7 +50,7 @@ model Tools {
   brand_id   String?
   brand      Brands?      @relation(fields: [brand_id], references: [id])
   created_at DateTime     @default(now())
-  using      Using[]
+  using      Using?
   comments   Comments[]
   toolsImage ToolsImage[]
 
@@ -73,7 +73,7 @@ model Using {
   id         String   @id @default(uuid())
   user_id    String   @unique
   user       Users    @relation(fields: [user_id], references: [id])
-  tool_id    String
+  tool_id    String   @unique
   tool       Tools    @relation(fields: [tool_id], references: [id])
   updated_at DateTime @updatedAt()
   created_at DateTime @default(now())

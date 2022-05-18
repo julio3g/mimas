@@ -24,6 +24,6 @@ usersRoutes.get(
   ensureAdmin,
   listUsersController.handle,
 );
-usersRoutes.put(':/id', updateUserController.handle);
+usersRoutes.put(':/id', ensureAuthenticated, updateUserController.handle);
 usersRoutes.delete('/:id', ensureAuthenticated, deleteUserController.handle);
 usersRoutes.get('/profile', ensureAuthenticated, profileUserController.handle);
