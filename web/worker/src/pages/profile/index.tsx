@@ -1,9 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
-import { Header } from '../components/Header';
-import { AuthContext } from '../contexts/AuthContext';
-import { setupAPIClient } from '../services/api';
-import { api } from '../services/apiClient';
-import { withSSRAuth } from '../utils/withSSRAuth';
+import { Header } from '../../components/Header';
+import { AuthContext } from '../../contexts/AuthContext';
+import { api } from '../../services/apiClient';
 
 interface UserInfo {
   name: string;

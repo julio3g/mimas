@@ -25,10 +25,10 @@ type Tool = {
 
 export default function Home() {
   const { user, signOut } = useContext(AuthContext);
-  const [tools, setTools] = React.useState<Tool[]>([]);
+  const [tools, setTools] = React.useState([]);
   useEffect(() => {
-    api.get<Tool[]>('/tools').then((response) => {
-      setTools(response.data);
+    api.get('/tools').then((response) => {
+      console.log(response);
     });
   }, []);
   useEffect(() => {
@@ -48,13 +48,13 @@ export default function Home() {
       <main>
         <button onClick={signOut}>Sing Out</button>
         <section>
-          {tools.map((tool) => {
+          {/* {tools.map((tool) => {
             return (
               <li key={tool.id}>
                 <p>{tool.name}</p>
               </li>
             );
-          })}
+          })} */}
         </section>
       </main>
     </>

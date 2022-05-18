@@ -12,7 +12,7 @@ export function Header() {
         </Link>
         <nav>
           <p>{user?.name}</p>
-          <Link href="/profile">profile</Link>
+          <Link href={`/profile`}>profile</Link>
         </nav>
       </nav>
     </header>

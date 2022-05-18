@@ -22,8 +22,8 @@ export function setupAPIClient(ctx = undefined) {
       return response;
     },
     (error: AxiosError) => {
-      console.log(error.code);
-      if (error.response.status === 401) {
+      console.log(error?.response?.status);
+      if (error?.response?.status === 401) {
         if (error.response.data?.message === 'Invalid token!') {
           // // renovar o token
           cookies = parseCookies();
