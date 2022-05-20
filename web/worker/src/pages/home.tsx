@@ -27,17 +27,9 @@ export default function Home() {
   const { user, signOut } = useContext(AuthContext);
   const [tools, setTools] = React.useState([]);
   useEffect(() => {
-    api.get('/tools').then((response) => {
-      console.log(response);
+    api.get('/tools/').then((response) => {
+      setTools(response.data);
     });
-  }, []);
-  useEffect(() => {
-    api
-      .get('/users/profile')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
   }, []);
   return (
     <>
@@ -48,13 +40,13 @@ export default function Home() {
       <main>
         <button onClick={signOut}>Sing Out</button>
         <section>
-          {/* {tools.map((tool) => {
+          {tools.map((tool) => {
             return (
               <li key={tool.id}>
                 <p>{tool.name}</p>
               </li>
             );
-          })} */}
+          })}
         </section>
       </main>
     </>
@@ -65,7 +57,5 @@ export const getServerSideProps = withSSRAuth(async (ctx) => {
   const response = await apiClient.get('/users/profile');
   // console.log(response.data);
 
-  return {
-    props: {},
-  };
+  return { props: {},};
 });

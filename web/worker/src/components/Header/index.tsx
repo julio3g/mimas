@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useContext } from 'react';
+import styles from './styles.module.scss'
 import { AuthContext } from '../../contexts/AuthContext';
 
 export function Header() {

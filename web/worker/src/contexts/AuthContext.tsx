@@ -78,7 +78,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         path: '/',
       });
       setUser(newLoggedUser);
-      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       Router.push('/home');
     } catch (err) {
       console.log(err);

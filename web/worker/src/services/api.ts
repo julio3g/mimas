@@ -22,8 +22,7 @@ export function setupAPIClient(ctx = undefined) {
       return response;
     },
     (error: AxiosError) => {
-      console.log(error?.response?.status);
-      if (error?.response?.status === 401) {
+      if (error.response.status === 401) {
         if (error.response.data?.message === 'Invalid token!') {
           // // renovar o token
           cookies = parseCookies();
@@ -32,7 +31,7 @@ export function setupAPIClient(ctx = undefined) {
           if (!isRefreshing) {
             isRefreshing = true;
             api
-              .post('/refresh-token', { token: refreshToken })
+              .post('/refresh-token/', { token: refreshToken })
               .then((response) => {
                 const { token } = response.data;
                 setCookie(ctx, 'mimas_next_access_token', token, {
@@ -48,7 +47,7 @@ export function setupAPIClient(ctx = undefined) {
                     path: '/',
                   },
                 );
-                api.defaults.headers['Authorization'] = `Bearer ${token}`;
+                api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 failedRequestsQueue.forEach((request) =>
                   request.onSuccess(token),
                 );

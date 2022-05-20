@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { Header } from '../../components/Header';
+import { SideBarProfile } from '../../components/SideBarProfile';
 import { AuthContext } from '../../contexts/AuthContext';
 import { api } from '../../services/apiClient';
+import styles from './styles.module.scss'
 
-interface UserInfo {
+type UserInfo = {
   name: string;
   email: string;
   phone: string;
@@ -12,26 +14,30 @@ interface UserInfo {
 
 export default function Profile() {
   const { user, signOut } = useContext(AuthContext);
-
-  const userData = useState('');
-
-  const [dataUser, setDataUser] = useState([]);
-  useEffect(() => {
-    api
-      .get('/users/profile')
-      .then((response) => {
-        const { name } = response.data;
-        setDataUser(name);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const [dataUser, setDataUser] = useState<UserInfo>();
+  // useEffect(() => {
+  //   api
+  //     .get('/users/profile')
+  //     .then((response) => {
+  //       const { name, email, password } = response.data;
+  //       setDataUser(name, email, password);
+  //     })
+  // }, []);
 
   return (
-    <div>
+    <main className={`container ${styles.profile}`}>
       <Header />
-      <h1>Profile</h1>
-      <p>{dataUser}</p>
-      <button onClick={signOut}>Sing Out</button>
-    </div>
+      <div>
+        <SideBarProfile/>
+        <div>
+          <h1>{user?.name}</h1>
+        </div>
+      </div>
+      <div>
+        <h1>Profile</h1>
+
+        <button onClick={signOut}>Sing Out</button>
+      </div>
+    </main>
   );
 }
