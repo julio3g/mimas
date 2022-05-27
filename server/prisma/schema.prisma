@@ -43,16 +43,16 @@ model UsersTokens {
 }
 
 model Tools {
-  id         String       @id @default(uuid())
-  name       String       @unique
+  id         String      @id @default(uuid())
+  name       String      @unique
   amount     String
-  available  Boolean      @default(true)
+  available  Boolean     @default(true)
   brand_id   String?
-  brand      Brands?      @relation(fields: [brand_id], references: [id])
-  created_at DateTime     @default(now())
+  brand      Brands?     @relation(fields: [brand_id], references: [id])
+  created_at DateTime    @default(now())
   using      Using?
   comments   Comments[]
-  toolsImage ToolsImage[]
+  toolsImage ToolsImage?
 
   @@map("tools")
 }
@@ -84,7 +84,7 @@ model Using {
 model ToolsImage {
   id         String   @id @default(uuid())
   image_name String
-  tool_id    String
+  tool_id    String   @unique
   tool       Tools    @relation(fields: [tool_id], references: [id])
   created_at DateTime @default(now())
 

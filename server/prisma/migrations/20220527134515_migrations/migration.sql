@@ -66,13 +66,13 @@ CREATE TABLE "using" (
 );
 
 -- CreateTable
-CREATE TABLE "tools_images" (
+CREATE TABLE "tools_image" (
     "id" TEXT NOT NULL,
-    "images_name" TEXT[],
+    "image_name" TEXT NOT NULL,
     "tool_id" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "tools_images_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "tools_image_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -89,6 +89,12 @@ CREATE UNIQUE INDEX "tools_name_key" ON "tools"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "using_user_id_key" ON "using"("user_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "using_tool_id_key" ON "using"("tool_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "tools_image_tool_id_key" ON "tools_image"("tool_id");
 
 -- AddForeignKey
 ALTER TABLE "users_tokens" ADD CONSTRAINT "users_tokens_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -109,4 +115,4 @@ ALTER TABLE "using" ADD CONSTRAINT "using_user_id_fkey" FOREIGN KEY ("user_id") 
 ALTER TABLE "using" ADD CONSTRAINT "using_tool_id_fkey" FOREIGN KEY ("tool_id") REFERENCES "tools"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "tools_images" ADD CONSTRAINT "tools_images_tool_id_fkey" FOREIGN KEY ("tool_id") REFERENCES "tools"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "tools_image" ADD CONSTRAINT "tools_image_tool_id_fkey" FOREIGN KEY ("tool_id") REFERENCES "tools"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

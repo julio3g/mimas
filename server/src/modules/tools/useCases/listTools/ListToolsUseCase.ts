@@ -1,9 +1,9 @@
-import { prisma } from '@database/prismaClient';
+import { prisma } from "@database/prismaClient";
 export class ListToolsUseCase {
   async execute() {
     return await prisma.tools.findMany({
       orderBy: {
-        name: 'asc',
+        name: "asc",
       },
       select: {
         id: true,

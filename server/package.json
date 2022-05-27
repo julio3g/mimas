@@ -7,7 +7,9 @@
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "dev": "ts-node-dev -r tsconfig-paths/register --exit-child --transpile-only  --ignore-watch node_modules --poll --respawn src/shared/infra/http/server.ts",
     "seed:admin": "ts-node-dev src/shared/seeds/admin.ts",
-    "seed:worker": "ts-node-dev src/shared/seeds/worker.ts"
+    "seed:worker": "ts-node-dev src/shared/seeds/worker.ts",
+    "seed:tools": "ts-node-dev src/shared/seeds/tools.ts",
+    "seed:brands": "ts-node-dev src/shared/seeds/brands.ts"
   },
   "dependencies": {
     "@prisma/client": "^3.8.1",
